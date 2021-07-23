@@ -6,7 +6,6 @@ import threading
 import time
 import datetime
 import socket
-import ast
 import traceback
 import json
 import struct
@@ -21,11 +20,17 @@ def clip(x, s=0.2):
     :return:
     """
     while True:
-        text = pyperclip.paste()
-        if text != x['text']:
-            x['text'] = text
-            x['time'] = time.time()
-        time.sleep(s)
+        try:
+            text = pyperclip.paste()
+            if text != x['text']:
+                x['text'] = text
+                x['time'] = time.time()
+            time.sleep(s)
+        except:
+            print(str(datetime.datetime.now()), ': 访问剪切板失败(锁屏必然会产生此问题), 暂停 %d 秒后尝试!' % s * 20)
+            traceback.print_exc()
+            print()
+            time.sleep(s * 20)
 
 
 def server(port=48011, s=0.2, test=False):
@@ -115,7 +120,7 @@ def client(ip, port=48011, s=0.2, ss=0.4):
             print(datetime.datetime.now(), ': 将重新连接server, 出错信息:')
             traceback.print_exc()
             print()
-            time.sleep(ss * 2)
+            time.sleep(ss * 10)
 
 
 if __name__ == '__main__':
