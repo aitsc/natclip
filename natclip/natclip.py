@@ -37,7 +37,7 @@ def server(port=48011, s=0.2, test=False):
     """
     :param port: int; 端口
     :param s: float; 读取剪切板间隔, 单位秒
-    :param test bool; 是否测试
+    :param test: bool; 是否测试
     :return:
     """
     print('启动 server, 端口:', port)

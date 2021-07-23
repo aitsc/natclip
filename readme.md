@@ -14,3 +14,10 @@
 
 6. 通过服务端再启动客户端连接另一个服务端可以实现多台电脑的共享剪切板
 
+## windows server 端的一个例子
+
+![server](server.png)
+
+## macos client 端的一个例子
+
+![client](client.png)
