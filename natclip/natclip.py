@@ -10,6 +10,7 @@ import traceback
 import json
 import struct
 import sys
+import copy
 
 
 def clip(x, s=0.2):
@@ -25,6 +26,7 @@ def clip(x, s=0.2):
             if text != x['text']:
                 x['text'] = text
                 x['time'] = time.time()
+                print(str(datetime.datetime.now()), '复制了%d个字符' % len(x['text']))
             time.sleep(s)
         except:
             print(str(datetime.datetime.now()), ': 访问剪切板失败(锁屏必然会产生此问题), 暂停 %d 秒后尝试!' % s * 20)
@@ -100,7 +102,8 @@ def client(ip, port=48011, s=0.2, ss=0.4):
             client.connect((ip, port))
             while True:
                 post_dict = {'sys_time': time.time()}
-                post_dict.update(xx)
+                xx_ = copy.deepcopy(xx)  # 防止在这个过程中改变内容
+                post_dict.update(xx_)
                 if post_dict['sys_time'] - post_dict['time'] > 3 * ss:  # 不用每次传输同样内容, 节省带宽, 存在没有接收到的可能
                     post_dict['text'] = None
                 ret = json.dumps(post_dict).encode('utf-8')
@@ -108,7 +111,7 @@ def client(ip, port=48011, s=0.2, ss=0.4):
                 client.send(ret)
                 text = client.recv(struct.unpack('i', client.recv(4, socket.MSG_WAITALL))[0], socket.MSG_WAITALL).decode(
                     'utf-8')[1:]  # 接收server复制的内容
-                if text and text != xx['text']:
+                if text and text != xx_['text']:
                     pyperclip.copy(text)
                     xx['text'] = text
                     xx['time'] = time.time()

@@ -10,7 +10,7 @@ LONGDOC = """
 
 setup(
     name='natclip',
-    version='0.3',
+    version='0.4',
     description="tanshicheng's tools",
     long_description=LONGDOC,
     author='tanshicheng',

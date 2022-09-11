@@ -1,4 +1,4 @@
-实现windows、macos或及其之间的剪切板共享, 可用于moonlight串流等等.
+实现windows、macos或及其之间的剪切板文本共享, 可用于moonlight串流等远程控制剪切板不能用或失效的问题.
 
 # 教程
 
