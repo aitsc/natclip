@@ -1,21 +1,25 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
+import os
 
-LONGDOC = """
+if os.path.exists('readme.md'):
+    long_description = open('readme.md', 'r', encoding='utf8').read()
+else:
+    long_description = """
 作者:
     tanshicheng
 包括:
-    用于win,macos局域网内共享剪切板, 适用于moonlight
+    用于win,macos局域网内共享剪切板, 适用于moonlight等不支持剪切板的工具
 """
 
 setup(
     name='natclip',
-    version='0.4',
+    version='0.6',
     description="tanshicheng's tools",
-    long_description=LONGDOC,
+    long_description=long_description,
     author='tanshicheng',
     license='GPLv3',
-    url='https://github.com/aitsc',
+    url='https://github.com/aitsc/natclip',
     keywords='tools',
     packages=find_packages(),
 
@@ -30,4 +34,9 @@ setup(
         'pyperclip>=1.7.0',
     ],
     python_requires='>=3.5',
+    entry_points={  # 打包到bin
+        'console_scripts': [
+            'natclip=natclip.main:main',  # 包不能有-符号
+        ],
+    },
 )

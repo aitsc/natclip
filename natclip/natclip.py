@@ -93,7 +93,7 @@ def client(ip, port=48011, s=0.2, ss=0.4):
     :param ss: float; 每次访问服务端间隔, 单位秒
     :return:
     """
-    print('启动 client (确保先启动 server)')
+    print('启动 client (确保先启动 server), 服务端: ', ip, port)
     xx = {'text': pyperclip.paste(), 'time': 0}
     threading.Thread(target=clip, args=(xx, s)).start()  # 不断读取本地剪切板
     while True:

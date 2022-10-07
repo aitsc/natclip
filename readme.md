@@ -6,15 +6,17 @@
 
 2. 打开终端运行(两台电脑都需要): pip install natclip
 
-3. 启动服务端: python -c "import natclip as n; n.server()"
+3. 启动服务端: natclip
 
-4. 启动客户端: python -c "import natclip as n; n.client('这里填服务端的ip地址')"
+4. 启动客户端: natclip -c -i=这里填服务端的ip地址
 
 5. 服务端防火墙放行tcp端口(默认端口48011)
 
 6. 通过服务端再启动客户端连接另一个服务端可以实现多台电脑的共享剪切板
 
 7. 套一个加密代理和内网穿透可以实现公网剪切板共享
+
+8. 查看其他可修改参数: natclip -h
 
 ## windows server 端的一个例子
 
